@@ -145,6 +145,7 @@ namespace TiltBrush
             ReadOnlyNotice,
             ShowContribution,
             WhatIsNew,
+            dratlbeginopen,
 
             // Open Brush Reserved Enums 1000-1999
             LanguagePopup = 1000,
@@ -4855,6 +4856,9 @@ namespace TiltBrush
                     break;
                 case GlobalCommands.OpenExampleScriptsList:
                     OpenURLAndInformUser($"http://localhost:{App.HttpServer.HttpPort}/examplescripts");
+                    break;
+                case GlobalCommands.dratlbeginopen:
+                    m_PanelManager.ToggleDrAtlPanelsn();
                     break;
                 case GlobalCommands.MultiplayerTogglePanel:
                     m_PanelManager.ToggleMultiplayerPanels();

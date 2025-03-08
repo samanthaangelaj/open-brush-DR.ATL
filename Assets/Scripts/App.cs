@@ -1209,6 +1209,10 @@ namespace TiltBrush
             {
                 PanelManager.m_Instance.ToggleMultiplayerPanels();
             }
+            else if (PanelManager.m_Instance.DrAtlActive())
+            {
+                PanelManager.m_Instance.ToggleDrAtlPanelsn();
+            }
 
             // Hide all panels.
             SketchControlsScript.m_Instance.RequestPanelsVisibility(false);

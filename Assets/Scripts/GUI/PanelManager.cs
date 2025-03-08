@@ -164,7 +164,10 @@ namespace TiltBrush
             MemoryWarningToStandard,
             Multiplayer,
             StandardToMultiplayer,
-            MultiplayerToStandard
+            MultiplayerToStandard,
+            DrAtl,
+            StandardToAtl,
+            AtlToStandard
         }
 
         public enum PaneVisualsState
@@ -230,6 +233,7 @@ namespace TiltBrush
         private List<BasePanel> m_BrushLabPanels;
         private List<BasePanel> m_MultiplayerPanels;
         private BasePanel m_AdminPanel;
+        private BasePanel m_dratlbegin;
 
         private AdvancedPanelLayouts m_CachedPanelLayouts;
 
@@ -257,6 +261,7 @@ namespace TiltBrush
         private float m_CameraScale;
         private float m_BrushLabScale;
         private float m_MultiplayerScale;
+        private float m_drAtlBeginScale;
 
         private PanelsState m_PanelsState;
         private PanelMode m_PanelsMode;
@@ -296,7 +301,7 @@ namespace TiltBrush
         public bool PanelsAreStable()
         {
             return StandardActive() || SketchbookActive() || SettingsActive() || MemoryWarningActive() ||
-                CameraActive() || BrushLabActive() || MultiplayerActive();
+                CameraActive() || BrushLabActive() || MultiplayerActive() || DrAtlActive(); 
         }
         public bool StandardActive() { return m_PanelsMode == PanelMode.Standard; }
         public bool SketchbookActive() { return m_PanelsMode == PanelMode.Sketchbook; }
@@ -305,6 +310,7 @@ namespace TiltBrush
         public bool MemoryWarningActive() { return m_PanelsMode == PanelMode.MemoryWarning; }
         public bool BrushLabActive() { return m_PanelsMode == PanelMode.BrushLab; }
         public bool MultiplayerActive() { return m_PanelsMode == PanelMode.Multiplayer; }
+        public bool DrAtlActive() { return m_PanelsMode == PanelMode.DrAtl; }
         public bool PanelsHaveBeenCustomized() { return m_PanelsCustomized; }
         public bool AdvancedModeActive() { return m_AdvancedPanels; }
         public bool SketchbookActiveIncludingTransitions()
@@ -345,7 +351,7 @@ namespace TiltBrush
         public bool GazePanelsAreVisible() { return m_PanelsState == PanelsState.Visible; }
         public List<PanelData> GetAllPanels() { return m_AllPanels; }
         public BasePanel GetAdminPanel() { return m_AdminPanel; }
-
+  
         public BasePanel LastPanelInteractedWith
         {
             get { return m_LastPanelInteractedWith; }
@@ -366,7 +372,7 @@ namespace TiltBrush
                 type == BasePanel.PanelType.AppSettings || type == BasePanel.PanelType.AppSettingsMobile ||
                 type == BasePanel.PanelType.Sketchbook || type == BasePanel.PanelType.SketchbookMobile ||
                 type == BasePanel.PanelType.Camera || type == BasePanel.PanelType.MemoryWarning ||
-                type == BasePanel.PanelType.Multiplayer;
+                type == BasePanel.PanelType.Multiplayer || type == BasePanel.PanelType.DrATLBegin;
         }
 
         // Core panels are those that exist in the basic mode experience.  Practically, those that
@@ -402,6 +408,7 @@ namespace TiltBrush
             m_MasterScale = 0.0f;
             m_StandardScale = 1.0f;
             m_SketchbookScale = 0.0f;
+            m_drAtlBeginScale = 0.0f;
 
             // Start with advanced panels off.
             m_AdvancedPanels = PlayerPrefs.GetInt(kPlayerPrefAdvancedMode, 0) == 1;
@@ -424,6 +431,10 @@ namespace TiltBrush
                 {
                     // Only create one of our unique panels
                     if (IsPanelUnique(type))
+                    {
+                        CreatePanel(m_PanelMap[i], false);
+                    }
+                    else if((int)type == 39)//drAtl
                     {
                         CreatePanel(m_PanelMap[i], false);
                     }
@@ -566,6 +577,10 @@ namespace TiltBrush
                 {
                     Debug.Assert(m_AdminPanel == null, "Multiple Admin Panels are being created.");
                     m_AdminPanel = p;
+                }
+                else if (p.Type == BasePanel.PanelType.DrATLBegin)
+                {
+                    m_dratlbegin = p;
                 }
 
                 PanelWidget grabWidget = p.GetComponent<PanelWidget>();
@@ -1895,10 +1910,21 @@ namespace TiltBrush
             }
         }
 
+        public void ToggleDrAtlPanelsn()
+        {
+            ToggleMode(m_dratlbegin, PanelMode.DrAtl, PanelMode.StandardToAtl,
+               PanelMode.AtlToStandard);
+        }
+
         public void ToggleMultiplayerPanels()
         {
             ToggleMode(m_MultiplayerPanels, PanelMode.Multiplayer, PanelMode.StandardToMultiplayer,
                 PanelMode.MultiplayerToStandard);
+        }
+
+        public void ToggleMode(BasePanel panel, PanelMode mode, PanelMode toMode, PanelMode fromMode)
+        {
+            ToggleMode(new List<BasePanel> { panel }, mode, toMode, fromMode);
         }
 
         // This function toggles between the 'mode' parameter and PanelMode.Standard.  Currently,
@@ -1914,7 +1940,8 @@ namespace TiltBrush
                     m_PanelsMode == PanelMode.SettingsToStandard ||
                     m_PanelsMode == PanelMode.CameraToStandard ||
                     m_PanelsMode == PanelMode.BrushLabToStandard ||
-                    m_PanelsMode == PanelMode.MultiplayerToStandard)
+                    m_PanelsMode == PanelMode.MultiplayerToStandard ||
+                    m_PanelsMode == PanelMode.AtlToStandard)
                 {
                     // If we're in full standard mode, reset the panels before we shrink 'em down.
                     if (m_PanelsMode == PanelMode.Standard)
@@ -1982,6 +2009,7 @@ namespace TiltBrush
             m_BrushLabScale = 0.0f;
             m_MemoryWarningScale = 0.0f;
             m_MultiplayerScale = 0.0f;
+            m_drAtlBeginScale = 0.0f;
 
             switch (mode)
             {
@@ -2005,6 +2033,9 @@ namespace TiltBrush
                     break;
                 case PanelMode.Multiplayer:
                     m_MultiplayerScale = 1.0f;
+                    break;
+                case PanelMode.DrAtl:
+                    m_drAtlBeginScale = 1.0f;
                     break;
                 default:
                     Debug.LogError("PanelManager.ForceModeScale() called with unsupported mode.");
@@ -2045,6 +2076,12 @@ namespace TiltBrush
             SetPanelListScaleAndActive(m_CameraPanels, m_CameraScale);
             SetPanelListScaleAndActive(m_BrushLabPanels, m_BrushLabScale);
             SetPanelListScaleAndActive(m_MultiplayerPanels, m_MultiplayerScale);
+            SetPanelListScaleAndActive(m_dratlbegin, m_drAtlBeginScale);
+        }
+
+        void SetPanelListScaleAndActive(BasePanel panel, float scale)
+        {
+            SetPanelListScaleAndActive(new List<BasePanel> { panel }, scale);
         }
 
         void SetPanelListScaleAndActive(List<BasePanel> panels, float scale)
@@ -2095,6 +2132,12 @@ namespace TiltBrush
                     break;
                 case PanelMode.MultiplayerToStandard:
                     AnimateScaleToMode(ref m_MultiplayerScale, ref m_StandardScale, PanelMode.Standard);
+                    break;
+                case PanelMode.StandardToAtl:
+                    AnimateScaleToMode(ref m_StandardScale, ref m_drAtlBeginScale, PanelMode.DrAtl);
+                    break;
+                case PanelMode.AtlToStandard:
+                    AnimateScaleToMode(ref m_drAtlBeginScale, ref m_StandardScale, PanelMode.Standard);
                     break;
                 case PanelMode.BrushLabToStandard:
                     AnimateScaleToMode(ref m_BrushLabScale, ref m_StandardScale, PanelMode.Standard);
