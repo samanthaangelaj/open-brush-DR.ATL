@@ -133,10 +133,50 @@ namespace TiltBrush
         {
             m_IsLoading = true;
 
+            //Pinceles no validos en experiencia DRATL
+            List<string> brushesToRemove = new List<string>
+            {
+                "Ink",
+                "ThickPaint",
+                "Marker",
+                "TaperedMarker",
+                "Highlighter", 
+                "TaperedFlat",
+                "Light", 
+                "Snow", 
+                "Rainbow", 
+                "VelvetInk", 
+                "Waveform", 
+                "Splatter", 
+                "DuctTape", 
+                "Paper", 
+                "CoarseBristles", 
+                "Electricity", 
+                "Streamers", 
+                "Hypercolor",
+                "Bubbles", 
+                "NeonPulse", 
+                "CelVinyl", 
+                "HyperGrid", 
+                "LightWire",
+                "ChromaticWave", 
+                "Icing", 
+                "Toon", 
+                "Wire", 
+                "Disco", 
+                "Lofted", 
+                "ShinyHull", 
+                "MatteHull", 
+                "UnlitHull"
+
+            };
+
             // Recreate m_GuidToBrush
             {
                 var manifestBrushes = LoadBrushesInManifest();
                 manifestBrushes.Add(DefaultBrush);
+
+                manifestBrushes = manifestBrushes.Where(brush => brush != null && !brushesToRemove.Contains(brush.DurableName)).ToList();
 
                 m_GuidToBrush.Clear();
                 m_AllBrushes = null;
