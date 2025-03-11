@@ -111,5 +111,3 @@ Packages/com.unity.xr.picoxr
 
 # Cache files
 *.cache
-/Assets/AddressableAssetsData/Android/addressables_content_state.bin
-/Assets/Scenes

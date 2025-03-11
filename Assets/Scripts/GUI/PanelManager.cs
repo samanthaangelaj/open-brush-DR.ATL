@@ -218,10 +218,6 @@ namespace TiltBrush
             {
                 get
                 {
-                    if(m_Panel.Type == BasePanel.PanelType.DrATLBegin)
-                    {
-                        return true;
-                    }
                     // Admin panel is always available.
                     return (PanelManager.m_Instance.IsAdminPanel(m_Panel.Type) ||
                         (PanelManager.m_Instance.AdvancedModeActive() ==

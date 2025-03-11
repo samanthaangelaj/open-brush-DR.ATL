@@ -318,7 +318,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272310558547734}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7d0b1933e6839443a2050b4306ef453, type: 3}
   m_Name: 
@@ -388,17 +388,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272310558547734}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6311d8a25dba6a443be8afe87803c545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowDuration: 0.25
   m_GrabDistance: 1.4
-  m_CollisionRadius: 1.2
+  m_CollisionRadius: 0.8
   m_AllowTwoHandGrab: 0
   m_DestroyOnHide: 0
-  m_AllowHideWithToss: 1
+  m_AllowHideWithToss: 0
   m_DisableDrift: 0
   m_RecordMovements: 0
   m_AllowSnapping: 0
