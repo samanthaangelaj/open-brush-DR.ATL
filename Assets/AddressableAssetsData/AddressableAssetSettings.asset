@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
   m_DefaultGroup: 677cec2ce1ef8b5428e8380b98e780ba
-  m_CachedHash:
+  m_currentHash:
     serializedVersion: 2
-    Hash: 2b7bea248e2793f7f7f356bce5824c4f
+    Hash: a56ba67313d6dd41dc00eadb3222f1ad
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -151,3 +151,4 @@ MonoBehaviour:
     m_Settings: {fileID: 11400000}
     m_NextInstanceId: 0
     m_RegisteredServiceTypeRefs: []
+    m_PingTimeoutInMilliseconds: 5000
