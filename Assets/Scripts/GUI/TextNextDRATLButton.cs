@@ -107,4 +107,9 @@ public class TextNextDRATLButton : BaseButton
         // "Prev" siempre debe estar visible para retroceder, pero si estamos en 0, hace la acción de volver a la selección de obras
         btnPrev.SetActive(true);
     }
+    override public void GainFocus()
+    {
+        base.GainFocus();
+        ForceDescriptionDeactivate();
+    }
 }

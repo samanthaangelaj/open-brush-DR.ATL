@@ -16,12 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 677cec2ce1ef8b5428e8380b98e780ba
-  m_SerializeEntries:
-  - m_GUID: 85fe70c184c3dec48ab6d21574dae519
-    m_Address: dratl/Materials/erupcion-paricutin.png!Large
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6a7373c58080f5b4b9733a6655fc804f, type: 2}
   m_SchemaSet:
