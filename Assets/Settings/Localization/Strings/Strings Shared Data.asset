@@ -3439,6 +3439,10 @@ MonoBehaviour:
     m_Key: ADMIN_PANEL_MULTIPLAYER_DESCRIPTION
     m_Metadata:
       m_Items: []
+  - m_Id: 350537571173990400
+    m_Key: EXTRA_PANEL_DRATL_BUTTON_DESCRIPTION
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

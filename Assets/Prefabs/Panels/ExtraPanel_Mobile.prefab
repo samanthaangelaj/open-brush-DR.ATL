@@ -1595,12 +1595,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DescriptionType: 0
   m_DescriptionYOffset: 0
-  m_DescriptionText: EXTRA_PANEL_LAYERS_BUTTON_DESCRIPTION
+  m_DescriptionText: 
   m_LocalizedDescription:
     m_TableReference:
       m_TableCollectionName: GUID:c84355079ab3f3e4f8f3812258805f86
     m_TableEntryReference:
-      m_KeyId: 68764809030598656
+      m_KeyId: 350537571173990400
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

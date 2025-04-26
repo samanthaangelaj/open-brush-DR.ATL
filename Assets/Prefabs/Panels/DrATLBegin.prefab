@@ -1038,7 +1038,7 @@ MonoBehaviour:
     m_LocalVariables: []
   m_DescriptionActivateSpeed: 12
   m_DescriptionZScale: 1
-  m_ButtonTexture: {fileID: 2800000, guid: 26a379fbf48cbc14c89865e1e881be62, type: 3}
+  m_ButtonTexture: {fileID: 2800000, guid: f990126cf1dc1594cb913546b266cb18, type: 3}
   m_AtlasTexture: 1
   m_ToggleButton: 0
   m_LongPressReleaseButton: 0
@@ -1210,7 +1210,7 @@ MonoBehaviour:
     m_LocalVariables: []
   m_DescriptionActivateSpeed: 12
   m_DescriptionZScale: 1
-  m_ButtonTexture: {fileID: 2800000, guid: 1f7f2679f151a8f4f97ef864669ebbc8, type: 3}
+  m_ButtonTexture: {fileID: 2800000, guid: c5274d4f9453895459acbd3d76b2bf25, type: 3}
   m_AtlasTexture: 1
   m_ToggleButton: 0
   m_LongPressReleaseButton: 0
